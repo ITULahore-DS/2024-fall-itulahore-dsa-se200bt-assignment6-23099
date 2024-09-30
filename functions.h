@@ -56,8 +56,7 @@ class Stack{
 class Queue{
     List myList;
 	int count;
-    Node* front;      // Pointer to the front of the queue
-    Node* back; // pointer to back
+
     public:
     Queue(int size );
     Queue();

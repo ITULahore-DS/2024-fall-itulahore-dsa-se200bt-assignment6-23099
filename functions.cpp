@@ -113,7 +113,7 @@ void Stack::push(int data){
     }
     count++;
   
-     
+     printStack();
 }
 int Stack::peek() {
     if (!myList.getHead()) {
@@ -144,7 +144,7 @@ void Stack:: pop(){
    }
 
    count--;
-   
+    printStack();
 }
 int Stack::size(){
     return count;
@@ -183,32 +183,24 @@ void  Queue::enqueue(int data){
  Node* node = new Node(data); // Create a new node
 
     if (isEmpty()) {
-        // If the queue is empty, both head and tail will point to the new node
+       
         myList.setHead(node);
-        myList.setTail(node);
+        myList.setTail(node);                    // If the queue is empty, both head and tail are pointing to the new node
     } else {
-        // If the queue is not empty, i will add the new node  to the end and update tail
-        myList.getTail()->setNext(node);
+    
+        myList.getTail()->setNext(node);           // If the queue is not empty, i will add the new node  to the end and update tail
         myList.setTail(node);
     }
 
     count ++;
+    printQueue();
    }
 
 int Queue:: size(){
         return count;
     }
 
-int Queue :: getFront(){
 
-    return front->getData();
-
-
-}
-int Queue:: getBack(){
-    
-    return back->getData();
-}
 void  Queue::dequeue(){
     
     if (myList.getHead() == nullptr) {
@@ -218,16 +210,17 @@ void  Queue::dequeue(){
 
     Node* temp = myList.getHead();
     if (myList.getHead() == myList.getTail()) {
-        // If there's only one element
-        myList.setHead(nullptr);
+        
+        myList.setHead(nullptr);       // If there's only one element
         myList.setTail(nullptr);
     } else {
-        // Move the head to the next node
-        myList.setHead(myList.getHead()->getNext());
+   
+        myList.setHead(myList.getHead()->getNext());             // Move the head to the next node
     }
 
-    delete temp; // Free the memory
+    delete temp; 
     count--;
+    printQueue();
 }
 
 
@@ -238,4 +231,40 @@ int Queue::peek() {
        return -1;
     }
     return myList.getHead()->getData();
+}
+void Stack::printStack() {
+    if (isEmpty()) {
+        cout << "Stack is empty." << endl;
+        return;
+    }
+
+    Node* current = myList.getHead();
+    int index = 0;
+    while (current != nullptr) {
+        
+        if (index == count) {
+            break;
+        }
+        cout << current->getData() << " ";
+        current = current->getNext();
+        index++;  
+    }
+    cout << endl;
+}
+void Queue::printQueue() {
+    if (isEmpty()) {
+        cout << "Queue is empty." << endl;
+        return;
+    }
+    int index = 0;
+    Node* current = myList.getHead();
+    while (current != nullptr) {
+        if(index == count){
+            break;
+        }
+        cout << current->getData() << " ";
+        current = current->getNext();
+        index ++;
+    }
+    cout << endl;
 }
