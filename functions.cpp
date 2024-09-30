@@ -141,6 +141,7 @@ void Stack:: pop(){
        Node* temp = myList.getHead(); 
        myList.setHead(myList.getHead()->getNext());  
        delete temp; 
+       temp = nullptr;
    }
 
    count--;
@@ -188,7 +189,8 @@ void  Queue::enqueue(int data){
         myList.setTail(node);                    // If the queue is empty, both head and tail are pointing to the new node
     } else {
     
-        myList.getTail()->setNext(node);           // If the queue is not empty, i will add the new node  to the end and update tail
+        myList.getTail()->setNext(node);  
+        node->setNext(nullptr);         // If the queue is not empty, i will add the new node  to the end and update tail
         myList.setTail(node);
     }
 
@@ -219,6 +221,7 @@ void  Queue::dequeue(){
     }
 
     delete temp; 
+    temp = nullptr;
     count--;
     printQueue();
 }
